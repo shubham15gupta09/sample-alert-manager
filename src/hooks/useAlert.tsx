@@ -22,17 +22,13 @@ const useAlert = () => {
   return alert;
 };
 
-const giveMeandomId = () => (Math.random() + 1).toString(36).substring(7);
+const generateUniqueId = () => (Math.random() + 1).toString(36).substring(7);
 
-type Props = {
-  children: ReactNode;
-};
-
-const AlertContextProvider = ({ children }: Props) => {
+const AlertContextProvider = ({ children }: { children: ReactNode }) => {
   const [alerts, setAlerts] = useState([] as AlertMessage[]);
 
   const pushAlert = (newAlert: AlertMessage) => {
-    setAlerts([...alerts, { ...newAlert, id: giveMeandomId() }]);
+    setAlerts([...alerts, { ...newAlert, id: generateUniqueId() }]);
   };
   const deleteAlert = (id: string) => {
     setAlerts(alerts.filter((alert) => alert.id !== id));
